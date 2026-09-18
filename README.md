@@ -132,10 +132,9 @@ klinis, bukan sekadar urutan pendefinisian di kode.
 
 | Nama | NIM | Peran |
 |---|---|---|
-| _(isi nama)_ | _(isi NIM)_ | AI Architect & Model Lead |
-| _(isi nama)_ | _(isi NIM)_ | Data & Knowledge Engineer |
-| _(isi nama)_ | _(isi NIM)_ | Integration & Interface Engineer |
-| _(isi nama)_ | _(isi NIM)_ | QA, Evaluation & Ethics Lead |
+| Angga Sianipar  |12S24032 | AI Architect & Model Lead |
+| Enjel Ayuti Napitupulu | 12S24056 | Data & Knowledge Engineer |
+|Theresia Oktaviani Samosir | 12S24055 | Integration & Interface Engineer / QA, Evaluation & Ethics Lead |
 
 ### 9. Roadmap Milestone Selanjutnya
 
