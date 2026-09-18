@@ -1,0 +1,24 @@
+[project]
+name = "delcare-copilot"
+version = "0.1.0"
+description = "DelCare Copilot - Sistem Pendukung Keputusan Cerdas untuk Optimasi Alur Layanan Klinik Kampus dan Keputusan Rujukan Berbasis Uniform Cost Search / A*"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [
+    { name = "Kelompok DelCare Copilot" },
+]
+dependencies = []
+
+[dependency-groups]
+dev = [
+    "pytest>=8.0.0",
+    "ruff>=0.6.0",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
