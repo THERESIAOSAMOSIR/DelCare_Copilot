@@ -1,148 +1,140 @@
 # DelCare Copilot
 
-**Sistem Pendukung Keputusan Cerdas untuk Optimasi Alur Layanan Klinik Kampus dan Keputusan Rujukan Berbasis Uniform Cost Search**
+Sistem Pendukung Keputusan Cerdas untuk operasional Klinik Kampus IT Del.
+Repositori ini memuat baseline pencarian Milestone 1 dan modul **Constraint
+Satisfaction Problem (CSP) penjadwalan shift petugas** untuk Milestone 2.
 
-Proyek Akhir (PjBL) — Mata Kuliah 10S3001 Kecerdasan Buatan
-Program Studi Sarjana Sistem Informasi, Institut Teknologi Del
-Semester Gasal 2026/2027
+## Milestone 2 — CSP Penjadwalan Shift
 
-## Milestone 1 — Business Problem Framing, Spesifikasi PEAS & Baseline Search
+### Tujuan bisnis
 
-### 1. Latar Belakang Singkat
+Klinik membutuhkan jadwal dokter dan perawat yang memenuhi kebutuhan setiap
+shift, menghormati cuti, batas kerja mingguan, dan pemerataan beban. Solver
+menghasilkan jadwal yang **layak dan terverifikasi**. Solver ini bukan
+optimizer berbasis fungsi biaya; optimalitas dalam arti biaya/keuntungan tidak
+diklaim karena tugas Milestone 2 memilih pendekatan CSP.
 
-Klinik/Poliklinik Kampus menangani beragam keluhan mahasiswa dan staf dengan
-tingkat urgensi berbeda (ringan, sedang, gawat darurat). Keputusan penting
-yang berulang setiap hari adalah: **kategori triase apa yang tepat, dan jika
-perlu dirujuk, ke rumah sakit mitra mana** — dengan mempertimbangkan waktu
-tunggu, jarak tempuh, dan risiko klinis jika penanganan tertunda.
+Data staf di repositori bersifat sintetis dan menggunakan kode anonim.
 
-DelCare Copilot memodelkan alur ini sebagai **masalah pencarian ruang
-keadaan (state-space search)**, di mana agen membantu merekomendasikan
-jalur penanganan berbiaya minimum — bukan sekadar "termurah", tetapi
-"termurah dengan mempertimbangkan risiko klinis" (lihat Bagian 3).
+### Pemodelan matematis
 
-### 2. Spesifikasi PEAS
+Model yang digunakan adalah CSP `P = (X, D, C)`.
 
-| Komponen | Deskripsi |
-|---|---|
-| **Performance Measure** | Waktu tunggu rata-rata dari keluhan ke keputusan tindakan (target < 15 menit untuk kasus non-darurat); akurasi rekomendasi dibanding keputusan dokter (≥ 85%); nol rekomendasi tanpa dasar SOP; tingkat kasus gawat darurat yang tertangani tanpa keterlambatan |
-| **Environment** | Partially observable (kondisi pasien tidak sepenuhnya teramati sistem), stochastic (respons klinis & ketersediaan RS tidak pasti), sequential (keputusan triase memengaruhi keputusan berikutnya), dynamic (antrean & kapasitas RS berubah), discrete (kategori & tahap berbentuk diskret) |
-| **Actuators** | Rekomendasi tindakan (observasi/rawat jalan/rujuk), draf surat rujukan, notifikasi ke petugas, pemilihan RS tujuan |
-| **Sensors** | Form keluhan & tanda vital, riwayat kunjungan, status ketersediaan RS mitra |
+- `X`: variabel `x(d, s, r)` untuk setiap hari `d`, shift `s`, dan slot peran
+  `r`. Dalam konfigurasi default terdapat 5 hari, 2 shift, 1 slot dokter, dan
+  2 slot perawat per shift, sehingga terdapat 30 variabel.
+- `D(x)`: himpunan ID staf dengan peran sesuai slot dan tidak cuti pada hari
+  tersebut.
+- `C1`: staf yang mengisi slot harus memiliki peran yang sesuai.
+- `C2`: staf tidak boleh ditugaskan pada hari cuti.
+- `C3`: staf tidak boleh mengisi dua slot dalam shift yang sama.
+- `C4`: staf tidak boleh bekerja pada dua shift di hari yang sama.
+- `C5`: selisih total beban staf dengan peran sama tidak boleh melebihi
+  `max_gap` (default 2).
+- `C6`: jumlah shift seorang staf dalam satu minggu tidak boleh melebihi
+  `max_shifts_per_week`.
+- `C7`: seluruh variabel harus terisi.
 
-### 3. Formulasi Ruang Keadaan (X, A, T, G, C)
+C3 dan C4 diterapkan sebagai constraint biner untuk AC-3. C5 dan C6 adalah
+constraint dengan konteks penugasan yang lebih luas, sehingga diperiksa saat
+backtracking dan diverifikasi ulang setelah solusi ditemukan.
 
-- **State (X):** kombinasi `(tahap_layanan, kategori_triase)`, mis. `PERIKSA_KUNING`, `RUJUK_RS_A_MERAH`. Lihat daftar lengkap di `src/graph_data.py`.
-- **Aksi (A):** transisi antar-state, memuat label *actuator* (`tetapkan_kategori_merah_prioritas`, `pilih_rujukan_RS_A`, dst).
-- **Transisi (T):** deterministik pada baseline ini (disederhanakan dari kondisi stochastic dunia nyata) — perluasan probabilistik direncanakan pada milestone lanjutan (mis. Markov Decision Process).
-- **Goal (G):** salah satu dari `{SELESAI_RAWAT_JALAN, SELESAI_RUJUK_A, SELESAI_RUJUK_B, SELESAI_RUJUK_C}`.
-- **Cost (C):** menit-ekuivalen = waktu tunggu/proses + estimasi waktu tempuh RS rujukan + penalti risiko klinis (dibuat besar untuk kasus `MERAH` menuju RS jauh, agar agen menghindari lintasan lambat pada kasus gawat darurat).
+### Algoritma
 
-### 4. Diagram Graf Ruang Keadaan
+1. `quick_feasibility` menolak kekurangan staf atau kapasitas sebelum pencarian.
+2. AC-3 menghapus nilai domain yang tidak memiliki pasangan kompatibel.
+3. Backtracking memilih variabel dengan MRV, mengurutkan nilai dengan LCV, dan
+   menggunakan forward checking.
+4. `verify_solution` memeriksa C1-C7 secara independen.
 
-```mermaid
-flowchart TD
-    A[PENDAFTARAN] -->|5| B[TRIASE]
-    B -->|3| H[TRIASE_HIJAU]
-    B -->|4| K[TRIASE_KUNING]
-    B -->|2| M[TRIASE_MERAH]
+Implementasi utama:
 
-    H -->|10| PH[PERIKSA_HIJAU]
-    PH -->|8| KRJ[KEPUTUSAN_RAWAT_JALAN]
-    KRJ -->|5| SRJ[SELESAI_RAWAT_JALAN]
-
-    K -->|12| PK[PERIKSA_KUNING]
-    PK -->|15| OK[OBSERVASI_KUNING]
-    PK -->|6| KRK[KEPUTUSAN_RUJUK_KUNING]
-    OK -->|10| KRJ
-    OK -->|8| KRK
-    KRK -->|6| RAK[RUJUK_RS_A_KUNING]
-    KRK -->|9| RBK[RUJUK_RS_B_KUNING]
-    KRK -->|14| RCK[RUJUK_RS_C_KUNING]
-    RAK -->|4| SRA[SELESAI_RUJUK_A]
-    RBK -->|4| SRB[SELESAI_RUJUK_B]
-    RCK -->|4| SRC[SELESAI_RUJUK_C]
-
-    M -->|4| PM[PERIKSA_MERAH]
-    PM -->|3| KRM[KEPUTUSAN_RUJUK_MERAH]
-    KRM -->|7| RAM[RUJUK_RS_A_MERAH]
-    KRM -->|11| RBM[RUJUK_RS_B_MERAH]
-    KRM -->|25| RCM[RUJUK_RS_C_MERAH]
-    RAM -->|3| SRA
-    RBM -->|3| SRB
-    RCM -->|3| SRC
+```text
+src/csp/model.py        Model X, D, dan C1-C7
+src/csp/ac3.py          Propagasi AC-3
+src/csp/backtracking.py Backtracking, MRV, LCV, forward checking
+src/csp/solver.py       API solve dan CLI jadwal
+src/csp/instances.py    Generator instance sintetis
 ```
 
-### 5. Menjalankan Proyek
+### Menjalankan solver
 
-Prasyarat: [Astral `uv`](https://docs.astral.sh/uv/) sudah terpasang.
+Prasyarat: [uv](https://docs.astral.sh/uv/).
 
 ```bash
-# 1. Clone repositori
-git clone <URL_REPOSITORI_KELOMPOK>
-cd delcare-copilot
-
-# 2. Sinkronisasi environment (membuat .venv otomatis)
 uv sync
-
-# 3. Jalankan baseline search
-uv run python -m src.cli --compare
-uv run python -m src.cli --start TRIASE_MERAH --algo astar
-uv run python -m src.cli --start KEPUTUSAN_RUJUK_KUNING --algo ucs
-
-# 4. Jalankan seluruh unit test (termasuk uji admissibility & consistency heuristik)
+uv run python -m src.csp.solver
+uv run python -m src.csp.solver --doctors 5 --nurses 12 --weeks 2
+uv run python -m src.csp.solver --leave D1:4 --leave N2:2
 uv run pytest -v
 ```
 
-### 6. Struktur Repositori
+Exit code solver adalah `0` jika jadwal valid dan `1` jika instance infeasible
+atau terkena batas node.
 
+## Analisis sensitivitas
+
+Benchmark mengukur pengaruh skala horizon dan heuristik terhadap jumlah
+variabel, percobaan node, backtracking, domain yang dipangkas AC-3, dan waktu
+eksekusi. Setiap skala dibuat feasible dengan generator sintetis:
+
+| Horizon | Dokter | Perawat | Variabel |
+|---:|---:|---:|---:|
+| 1 minggu | 4 | 8 | 30 |
+| 2 minggu | 5 | 10 | 60 |
+| 4 minggu | 7 | 14 | 120 |
+
+Jalankan benchmark berikut untuk menghasilkan tabel yang dapat dimasukkan ke
+laporan:
+
+```bash
+uv run python -m src.csp.benchmark
+uv run python -m src.csp.benchmark --weeks 1 2 4 --csv > benchmark.csv
 ```
-delcare-copilot/
-├── pyproject.toml          # Konfigurasi proyek & dependensi (Astral uv)
-├── README.md
-├── LICENSE
-├── src/
-│   ├── graph_data.py        # Graf domain: node, goal, bobot biaya bisnis
-│   ├── cli.py                # Entry point CLI
-│   └── search/
-│       ├── ucs.py            # Uniform Cost Search (heapq)
-│       ├── astar.py          # A* Search (heapq + heuristik)
-│       └── heuristics.py     # Heuristik admissible + bukti matematis
-└── tests/
-    ├── test_ucs.py
-    ├── test_astar.py
-    └── test_admissibility.py  # Bukti empiris admissibility & consistency
+
+Konfigurasi yang dibandingkan adalah seluruh heuristik aktif, tanpa AC-3,
+tanpa MRV, dan tanpa forward checking. `time_ms` bergantung pada perangkat,
+sedangkan `nodes`, `backtracks`, dan `ac3_pruned` adalah metrik algoritmik.
+Gunakan hasil benchmark aktual pada perangkat kelompok untuk grafik laporan;
+jangan menyalin angka waktu dari perangkat lain.
+
+## Pengujian
+
+Test mencakup:
+
+- kebenaran model, domain unary, AC-3, dan solver;
+- kombinasi heuristik;
+- validasi C1-C7 dan determinisme;
+- kapasitas tidak cukup, semua staf cuti, staf nol, batas node, serta horizon
+  dua minggu;
+- benchmark dua ukuran masalah dan empat konfigurasi heuristik.
+
+```bash
+uv run pytest -q
 ```
 
-### 7. Hasil Baseline (contoh)
+## Milestone 1 — Baseline Search
 
-| Skenario (start) | Lintasan Optimal | Total Biaya | Node Diekspansi (UCS vs A*) |
-|---|---|---|---|
-| `TRIASE_HIJAU` | HIJAU → PERIKSA → RAWAT JALAN → SELESAI | 23 | 4 vs 4 |
-| `TRIASE_KUNING` | KUNING → PERIKSA → RUJUK LANGSUNG → RS_A → SELESAI | 28 | 5 vs 5 |
-| `TRIASE_MERAH` | MERAH → PERIKSA → RUJUK SEGERA → **RS_A** (bukan RS_C) → SELESAI | 17 | 5 vs 5 |
+Modul `src/search` mempertahankan model ruang keadaan layanan klinik dari
+Milestone 1 dengan Uniform Cost Search dan A*. Baseline dapat dijalankan:
 
-Perhatikan pada skenario `MERAH`: meskipun RS_C mungkin terdaftar sebagai
-opsi, algoritma secara konsisten memilih **RS_A** karena bobot rujukan ke
-RS_C sengaja dibuat besar (mensimulasikan jarak/waktu tempuh jauh) —
-menunjukkan bahwa optimasi biaya benar-benar memengaruhi rekomendasi
-klinis, bukan sekadar urutan pendefinisian di kode.
+```bash
+uv run python -m src.cli --compare
+uv run python -m src.cli --start TRIASE_MERAH --algo astar
+```
 
-### 8. Tim & Peran
+## Rilis
 
-| Nama | NIM | Peran |
-|---|---|---|
-| Angga Sianipar  |12S24032 | AI Architect & Model Lead |
-| Enjel Ayuti Napitupulu | 12S24056 | Data & Knowledge Engineer |
-|Theresia Oktaviani Samosir | 12S24055 | Integration & Interface Engineer / QA, Evaluation & Ethics Lead |
+Tag rilis Milestone 2:
 
-### 9. Roadmap Milestone Selanjutnya
+```text
+v0.2-milestone2
+```
 
-- **Milestone 2 (W04):** CSP/GA untuk alokasi jadwal petugas & kapasitas RS mitra.
-- **Milestone 3 (W07):** RAG atas korpus SOP klinik, protokol triase Kemenkes, daftar RS rujukan.
-- **Milestone 4 (W11):** Agen ReAct + FastMCP untuk orkestrasi rekomendasi otomatis.
-- **Milestone 5 (W13):** Dashboard Gradio untuk petugas klinik.
+Sebelum pengumpulan, sertakan tautan repositori dan laporan PDF dengan format
+`Grup{KodeKelompok}-Tugas02.pdf`. Laporan perlu memuat pemodelan formal,
+algoritma, tabel/grafik sensitivitas, edge case, keterbatasan, dan kesimpulan.
 
 ## Lisensi
 
-Proyek ini dilisensikan di bawah [MIT License](LICENSE).
+MIT License. Lihat [LICENSE](LICENSE).
