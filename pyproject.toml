@@ -1,14 +1,17 @@
 [project]
 name = "delcare-copilot"
-version = "0.1.0"
-description = "DelCare Copilot - Sistem Pendukung Keputusan Cerdas untuk Optimasi Alur Layanan Klinik Kampus dan Keputusan Rujukan Berbasis Uniform Cost Search / A*"
+version = "0.3.0"
+description = "DelCare Copilot - Sistem Pendukung Keputusan Cerdas untuk Optimasi Alur Layanan Klinik Kampus dan Keputusan Rujukan Berbasis Search & Vector Knowledge Base"
 readme = "README.md"
 requires-python = ">=3.11"
 license = { text = "MIT" }
 authors = [
-    { name = "Kelompok DelCare Copilot" },
+    { name = "Kelompok 03 DelCare Copilot" },
 ]
-dependencies = []
+dependencies = [
+    "chromadb>=0.5.0",
+    "sentence-transformers>=3.0.0",
+]
 
 [dependency-groups]
 dev = [
