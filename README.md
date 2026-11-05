@@ -1,140 +1,102 @@
 # DelCare Copilot
 
 Sistem Pendukung Keputusan Cerdas untuk operasional Klinik Kampus IT Del.
-Repositori ini memuat baseline pencarian Milestone 1 dan modul **Constraint
-Satisfaction Problem (CSP) penjadwalan shift petugas** untuk Milestone 2.
+Repositori ini memuat:
+1. **Milestone 1:** Baseline pencarian alur triase & rujukan klinik (Uniform Cost Search & A* Search).
+2. **Milestone 2:** Constraint Satisfaction Problem (CSP) penjadwalan shift petugas medis (AC-3, Backtracking, MRV, LCV, FC).
+3. **Milestone 3:** Basis Pengetahuan Vektor Korpus Enterprise & Semantic Search RAG berbasis ChromaDB dan Sentence-Transformers.
 
-## Milestone 2 — CSP Penjadwalan Shift
+---
 
-### Tujuan bisnis
+## Milestone 3 — Vector Knowledge Base & Semantic Search
 
-Klinik membutuhkan jadwal dokter dan perawat yang memenuhi kebutuhan setiap
-shift, menghormati cuti, batas kerja mingguan, dan pemerataan beban. Solver
-menghasilkan jadwal yang **layak dan terverifikasi**. Solver ini bukan
-optimizer berbasis fungsi biaya; optimalitas dalam arti biaya/keuntungan tidak
-diklaim karena tugas Milestone 2 memilih pendekatan CSP.
+### Tujuan Bisnis & Latar Belakang
+Poliklinik Kampus IT Del melayani ratusan kunjungan mahasiswa dengan variasi keluhan medis. Ketiadaan akses cepat terhadap SOP resmi memicu potensi inkonsistensi keputusan triase. Milestone 3 membangun **Enterprise Semantic Knowledge Base** sebagai fondasi memori korpus yang krusial bagi sistem *Retrieval-Augmented Generation* (RAG) DelCare Copilot.
 
-Data staf di repositori bersifat sintetis dan menggunakan kode anonim.
+### Korpus Dokumen Enterprise
+Terdiri dari 12 dokumen SOP dan manual regulasi resmi fasyankes primer di `data/raw_docs/`:
+- `SOP-TRG-001`: Triase Prioritas MERAH (Gawat Darurat / Resusitasi)
+- `SOP-TRG-002`: Triase Prioritas KUNING (Kedaruratan Sedang / Urgensi Tinggi)
+- `SOP-TRG-003`: Triase Prioritas HIJAU & Pelayanan Rawat Jalan Mandiri
+- `SOP-ADM-004`: Alur Registrasi & Verifikasi Identitas Pasien
+- `SOP-RUJ-005`: Kriteria Pemilihan & Alur Rujukan RS Mitra (RS_A, RS_B, RS_C)
+- `SOP-EVK-006`: Penggunaan Ambulans Kampus & Prosedur Evakuasi Transportasi
+- `SOP-MED-007`: Tatalaksana Serangan Asma Akut & Gangguan Pernapasan
+- `SOP-MED-008`: Tatalaksana Sinkop (Pingsan), Hipoglikemia, & Dehidrasi Akut
+- `SOP-MED-009`: Tatalaksana Trauma Fisik, Fraktur Tulang, & Cedera Olahraga
+- `SOP-OBS-010`: Protokol Ruang Observasi Sementara & Batas Waktu Pemantauan
+- `SOP-FAR-011`: Pengelolaan & Dispensing Obat Kedaruratan Terbatas
+- `POL-PDP-012`: Kebijakan Kerahasiaan & Pelindungan Data Pribadi Rekam Medis (UU PDP)
 
-### Pemodelan matematis
+Seluruh dokumen mengacu pada sumber hukum dan regulasi terbuka: UU No. 17/2023, UU No. 27/2022, Permenkes No. 9/2014, Permenkes No. 16/2024, Permenkes No. 24/2022, SISRUTE Kemenkes RI, dan Pedoman WHO ETAT.
 
-Model yang digunakan adalah CSP `P = (X, D, C)`.
-
-- `X`: variabel `x(d, s, r)` untuk setiap hari `d`, shift `s`, dan slot peran
-  `r`. Dalam konfigurasi default terdapat 5 hari, 2 shift, 1 slot dokter, dan
-  2 slot perawat per shift, sehingga terdapat 30 variabel.
-- `D(x)`: himpunan ID staf dengan peran sesuai slot dan tidak cuti pada hari
-  tersebut.
-- `C1`: staf yang mengisi slot harus memiliki peran yang sesuai.
-- `C2`: staf tidak boleh ditugaskan pada hari cuti.
-- `C3`: staf tidak boleh mengisi dua slot dalam shift yang sama.
-- `C4`: staf tidak boleh bekerja pada dua shift di hari yang sama.
-- `C5`: selisih total beban staf dengan peran sama tidak boleh melebihi
-  `max_gap` (default 2).
-- `C6`: jumlah shift seorang staf dalam satu minggu tidak boleh melebihi
-  `max_shifts_per_week`.
-- `C7`: seluruh variabel harus terisi.
-
-C3 dan C4 diterapkan sebagai constraint biner untuk AC-3. C5 dan C6 adalah
-constraint dengan konteks penugasan yang lebih luas, sehingga diperiksa saat
-backtracking dan diverifikasi ulang setelah solusi ditemukan.
-
-### Algoritma
-
-1. `quick_feasibility` menolak kekurangan staf atau kapasitas sebelum pencarian.
-2. AC-3 menghapus nilai domain yang tidak memiliki pasangan kompatibel.
-3. Backtracking memilih variabel dengan MRV, mengurutkan nilai dengan LCV, dan
-   menggunakan forward checking.
-4. `verify_solution` memeriksa C1-C7 secara independen.
-
-Implementasi utama:
-
+### Arsitektur Modul Knowledge Base
 ```text
-src/csp/model.py        Model X, D, dan C1-C7
-src/csp/ac3.py          Propagasi AC-3
-src/csp/backtracking.py Backtracking, MRV, LCV, forward checking
-src/csp/solver.py       API solve dan CLI jadwal
-src/csp/instances.py    Generator instance sintetis
+delcare-copilot/
+├── data/
+│   ├── raw_docs/             # 12 dokumen teks SOP resmi
+│   └── chroma_db/            # Basis data vektor ChromaDB persisten
+├── src/
+│   └── knowledge/
+│       ├── __init__.py
+│       ├── chunking.py       # Word-aware recursive chunker & parser metadata
+│       ├── vector_store.py   # Persistent ChromaDB client & Sentence-Transformers
+│       └── retriever.py      # Semantic vector search & relevance threshold guardrail
+├── benchmarks/
+│   └── run_semantic_eval.py  # Tolok ukur 6 kueri bisnis & analisis penolakan OOD
+└── tests/
+    ├── test_chunking.py      # Pengujian unit chunking & boundary preservation
+    ├── test_vector_store.py  # Pengujian persistensi ChromaDB
+    └── test_retrieval.py     # Pengujian presisi temu balik & penolakan OOD
 ```
 
-### Menjalankan solver
-
-Prasyarat: [uv](https://docs.astral.sh/uv/).
+### Menjalankan Modul Milestone 3
+Prasyarat: Python >= 3.11 dan [uv](https://docs.astral.sh/uv/).
 
 ```bash
+# Instal dependensi baru
 uv sync
-uv run python -m src.csp.solver
-uv run python -m src.csp.solver --doctors 5 --nurses 12 --weeks 2
-uv run python -m src.csp.solver --leave D1:4 --leave N2:2
+
+# Inisialisasi indeks dokumen korpus ke ChromaDB
+uv run python -m src.cli --index-kb
+
+# Uji pencarian semantik via CLI
+uv run python -m src.cli --query "pasien pingsan tidak sadar di lapangan"
+uv run python -m src.cli --query "dada sesak dan mengi sehabis lari"
+uv run python -m src.cli --query "jadwal bayar uang kuliah semester baru"  # Kueri Out-of-Domain
+
+# Jalankan benchmark kueri bisnis (Literal, Sinonim, OOD)
+uv run python -m benchmarks.run_semantic_eval
+
+# Menjalankan seluruh rangkaian tes otomatis
 uv run pytest -v
 ```
 
-Exit code solver adalah `0` jika jadwal valid dan `1` jika instance infeasible
-atau terkena batas node.
-
-## Analisis sensitivitas
-
-Benchmark mengukur pengaruh skala horizon dan heuristik terhadap jumlah
-variabel, percobaan node, backtracking, domain yang dipangkas AC-3, dan waktu
-eksekusi. Setiap skala dibuat feasible dengan generator sintetis:
-
-| Horizon | Dokter | Perawat | Variabel |
-|---:|---:|---:|---:|
-| 1 minggu | 4 | 8 | 30 |
-| 2 minggu | 5 | 10 | 60 |
-| 4 minggu | 7 | 14 | 120 |
-
-Jalankan benchmark berikut untuk menghasilkan tabel yang dapat dimasukkan ke
-laporan:
-
-```bash
-uv run python -m src.csp.benchmark
-uv run python -m src.csp.benchmark --weeks 1 2 4 --csv > benchmark.csv
+### Rilis
+Tag rilis Milestone 3:
+```text
+v0.3-milestone3
 ```
 
-Konfigurasi yang dibandingkan adalah seluruh heuristik aktif, tanpa AC-3,
-tanpa MRV, dan tanpa forward checking. `time_ms` bergantung pada perangkat,
-sedangkan `nodes`, `backtracks`, dan `ac3_pruned` adalah metrik algoritmik.
-Gunakan hasil benchmark aktual pada perangkat kelompok untuk grafik laporan;
-jangan menyalin angka waktu dari perangkat lain.
+---
 
-## Pengujian
-
-Test mencakup:
-
-- kebenaran model, domain unary, AC-3, dan solver;
-- kombinasi heuristik;
-- validasi C1-C7 dan determinisme;
-- kapasitas tidak cukup, semua staf cuti, staf nol, batas node, serta horizon
-  dua minggu;
-- benchmark dua ukuran masalah dan empat konfigurasi heuristik.
-
+## Milestone 2 — CSP Penjadwalan Shift
+Modul CSP penjadwalan shift dokter dan perawat dengan algoritma AC-3, Backtracking (MRV, LCV, FC), dan batasan C1-C7:
 ```bash
-uv run pytest -q
+uv run python -m src.csp.solver
+uv run python -m src.csp.solver --leave D1:4 --leave N2:2
 ```
+
+---
 
 ## Milestone 1 — Baseline Search
-
-Modul `src/search` mempertahankan model ruang keadaan layanan klinik dari
-Milestone 1 dengan Uniform Cost Search dan A*. Baseline dapat dijalankan:
-
+Modul ruang keadaan alur layanan klinik dengan Uniform Cost Search dan A* Search:
 ```bash
 uv run python -m src.cli --compare
 uv run python -m src.cli --start TRIASE_MERAH --algo astar
 ```
 
-## Rilis
-
-Tag rilis Milestone 2:
-
-```text
-v0.2-milestone2
-```
-
-Sebelum pengumpulan, sertakan tautan repositori dan laporan PDF dengan format
-`Grup{KodeKelompok}-Tugas02.pdf`. Laporan perlu memuat pemodelan formal,
-algoritma, tabel/grafik sensitivitas, edge case, keterbatasan, dan kesimpulan.
+---
 
 ## Lisensi
-
 MIT License. Lihat [LICENSE](LICENSE).
