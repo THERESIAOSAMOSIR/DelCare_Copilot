@@ -1,0 +1,36 @@
+KODE DOKUMEN: SOP-MED-008
+JUDUL: SOP-MED-008: Tatalaksana Sinkop (Pingsan), Hipoglikemia, & Dehidrasi Akut Kegiatan Lapangan
+KATEGORI: Protokol Tindakan Medis
+TARGET AKSI DELCARE: STABILISASI_CAIRAN / ELEVASI_KAKI / OBSERVASI
+REFERENSI TERBUKA: Panduan Tatalaksana Gawat Darurat Penurunan Kesadaran & Sinkop Fasyankes Primer
+TAUTAN RESMI: https://peraturan.bpk.go.id/Details/258028/uu-no-17-tahun-2023
+TAUTAN ALTERNATIF: https://peraturan.bpk.go.id/Details/117304/permenkes-no-9-tahun-2014
+======================================================================
+
+POLIKLINIK INSTITUT TEKNOLOGI DEL
+STANDAR OPERASIONAL PROSEDUR: TATALAKSANA SINKOP DAN HILANG KESADARAN SINGKAT
+Nomor Dokumen: SOP-MED-008 | Revisi: 02 | Tanggal Efektif: 14 Oktober 2026
+
+1. TUJUAN
+Memberikan tata laksana cepat pada kejadian mahasiswa pingsan mendadak, kelelahan cuaca panas, hipoglikemia, atau dehidrasi saat apel, upacara, atau kegiatan lapangan kampus.
+
+2. RUANG LINGKUP
+Penanganan kegawatan non-trauma di Poliklinik IT Del dan pertolongan pertama di lapangan terbuka kampus IT Del.
+
+3. DEFINISI
+Sinkop adalah hilangnya kesadaran sementara yang terjadi secara tiba-tiba akibat hipoperfusi serebral global transien, ditandai dengan pemulihan spontan dan tuntas dalam hitungan detik hingga menit.
+
+4. PROTOKOL PENANGANAN
+a. Asesmen Kesadaran & Bantuan Awal:
+   - Pastikan lingkungan aman, longgarkan pakaian ketat pasien di sekitar leher dan dada.
+   - Tempatkan pasien pada posisi berbaring terlentang dengan posisi kaki ditinggikan 30 cm di atas kepala (posisi syok / Trendelenburg termodifikasi) untuk memperlancar venous return ke otak.
+   - Cek respons verbal dan cubit halus, cek pernapasan dan nadi karotis.
+b. Pemeriksaan Penunjang Cepat di Klinik:
+   - Cek Glukosa Darah Sewaktu (GDS) menggunakan glucometer stik portabel.
+   - Cek tekanan darah, SpO2, dan frekuensi denyut nadi.
+c. Penanganan Medis Berdasarkan Hasil:
+   - Hipoglikemia (GDS < 70 mg/dL): Jika sadar, berikan air gula manis atau teh manis hangat 200 ml; jika kesadaran belum pulih, pasang infus Dextrose 10% atau bolus Dextrose 40% (25-50 ml) intravena oleh dokter.
+   - Dehidrasi / Kelelahan Panas: Pasang infus NaCl 0.9% 500-1000 ml tetesan sedang, kompres dingin pada lipatan ketiak dan leher.
+d. Kriteria Pemulangan vs Rujukan:
+   - Jika pasien sadar penuh dalam < 10 menit, tanda vital stabil, GDS normal -> Observasi 2 jam di Ruang Observasi Klinik.
+   - Jika penurunan kesadaran berlangsung > 15 menit, didapatkan riwayat kejang, trauma kepala saat jatuh, atau aritmia jantung -> Segera kategorikan TRIASE MERAH dan rujuk ke RS_A (RSUD Porsea).

@@ -1,0 +1,39 @@
+KODE DOKUMEN: SOP-EVK-006
+JUDUL: SOP-EVK-006: Penggunaan Ambulans Kampus & Prosedur Evakuasi Transportasi Medis
+KATEGORI: Transportasi Medis & Evakuasi
+TARGET AKSI DELCARE: MOBILISASI_AMBULANS / TRANSFER_PASIEN
+REFERENSI TERBUKA: Pedoman Penyelenggaraan Pelayanan Ambulans Kemenkes RI & Standar SPGDT
+TAUTAN RESMI: https://peraturan.bpk.go.id/Details/89531/perbup-kab-tanjung-jabung-timur-no-10-tahun-2
+TAUTAN ALTERNATIF: https://peraturan.bpk.go.id/Details/256656/perwali-kota-sawah-lunto-no-3-tahun-2021
+======================================================================
+
+POLIKLINIK INSTITUT TEKNOLOGI DEL
+STANDAR OPERASIONAL PROSEDUR: EVAKUASI AMBULANS KAMPUS
+Nomor Dokumen: SOP-EVK-006 | Revisi: 01 | Tanggal Efektif: 14 Oktober 2026
+
+1. TUJUAN
+Memastikan ketersediaan armada ambulans kampus IT Del dalam kondisi siap pakai 24 jam untuk transfer rujukan pasien gawat darurat dan kedaruratan sedang secara aman dan selamat.
+
+2. RUANG LINGKUP
+Pengoperasian mobil ambulans kampus IT Del, sopir on-call, perlengkapan medis transfer, dan tim perawat pendamping dari poliklinik menuju fasilitas rujukan.
+
+3. DASAR HUKUM
+- Keputusan Menteri Kesehatan tentang Standar Sarana Prasarana dan Peralatan Ambulans Transport Medis Gawat Darurat.
+- Peraturan Pemerintah tentang Sistem Manajemen Keselamatan Transportasi Pasien Darurat.
+
+4. PERSIAPAN ARMADA & ALAT MEDIS AMBULANS
+a. Standar Alat Siap Pakai di Ambulans:
+   - Tabung oksigen utama (terisi minimal 1000 psi) + flowmeter dan regulator.
+   - Suction unit portabel dan bag-valve-mask (Ambu Bag) dewasa.
+   - Automated External Defibrillator (AED) portabel.
+   - Brankar utama (stretcher) berpengunci aman, scoop stretcher, dan neck collar rigid.
+   - Tas emergency transfer: spuit, infus set, cairan RL/NaCl, tensimeter, pulse oximeter.
+b. Kesiapan Pengemudi: Sopir ambulans dinas kampus wajib siaga di pos dalam radius 5 menit setelah bel darurat dibunyikan oleh Perawat Jaga.
+
+5. PROTOKOL MOBILISASI EVAKUASI
+a. Perintah Mobilisasi: Hanya dikeluarkan oleh Dokter Jaga yang bertugas.
+b. Perawat Pendamping: Minimal 1 perawat bertugas mendampingi di kabin belakang pasien, melakukan pemantauan tanda vital setiap 5 menit selama di perjalanan, dan mencatat perburukan kondisi.
+c. Komunikasi Radio/Telepon: Pengemudi menyalakan rotator dan sirine saat membawa pasien kategori MERAH, serta mematuhi prioritas rute lalu lintas Sitoluama-Porsea/Balige.
+
+6. INTEGRASI DELCARE COPILOT
+Kesiapan status ambulans dimasukkan sebagai variabel lingkungan pada sistem cerdas DelCare Copilot.

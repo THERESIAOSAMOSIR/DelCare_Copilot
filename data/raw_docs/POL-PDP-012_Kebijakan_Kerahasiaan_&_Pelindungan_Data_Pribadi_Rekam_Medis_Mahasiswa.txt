@@ -1,0 +1,31 @@
+KODE DOKUMEN: POL-PDP-012
+JUDUL: POL-PDP-012: Kebijakan Kerahasiaan & Pelindungan Data Pribadi Rekam Medis Mahasiswa
+KATEGORI: Kepatuhan Hukum & Privasi
+TARGET AKSI DELCARE: PROTEKSI_DATA_MEDIS / KONTROL_HAK_AKSES
+REFERENSI TERBUKA: Undang-Undang Republik Indonesia Nomor 27 Tahun 2022 tentang Pelindungan Data Pribadi
+TAUTAN RESMI: https://peraturan.bpk.go.id/Details/229798/uu-no-27-tahun-2022
+TAUTAN ALTERNATIF: https://peraturan.bpk.go.id/Details/245544/permenkes-no-24-tahun-2022
+======================================================================
+
+POLIKLINIK INSTITUT TEKNOLOGI DEL
+MANUAL KEBIJAKAN: KERAHASIAAN & PELINDUNGAN DATA PRIBADI REKAM MEDIS
+Nomor Dokumen: POL-PDP-012 | Revisi: 02 | Tanggal Efektif: 14 Oktober 2026
+
+1. TUJUAN
+Menjamin kepatuhan Poliklinik IT Del dan sistem AI DelCare Copilot terhadap regulasi privasi data nasional serta melindungi kerahasiaan rekam medis mahasiswa dan staf dari penyalahgunaan data.
+
+2. RUANG LINGKUP
+Seluruh pencatatan manual, database digital, log transaksi sistem rekomendasi AI DelCare Copilot, dan komunikasi rekam medis antar-tenaga kesehatan di lingkungan Institut Teknologi Del.
+
+3. DASAR HUKUM
+- Undang-Undang Republik Indonesia Nomor 27 Tahun 2022 tentang Pelindungan Data Pribadi (UU PDP). Sumber resmi terbuka: https://peraturan.bpk.go.id/Details/229798/uu-no-27-tahun-2022
+- Peraturan Menteri Kesehatan RI Nomor 24 Tahun 2022 tentang Rekam Medis. Sumber resmi terbuka: https://peraturan.bpk.go.id/Details/245544/permenkes-no-24-tahun-2022
+
+4. KETENTUAN POKOK PERLINDUNGAN DATA
+a. Klasifikasi Data Spesifik: Berdasarkan Pasal 4 ayat (3) UU PDP, data kesehatan, rekam medis, dan informasi riwayat penyakit individu diklasifikasikan sebagai Data Pribadi yang Bersifat Spesifik yang membutuhkan standar keamanan tingkat tinggi.
+b. Hak Akses Terbatas Petugas: Rekam medis hanya boleh diakses oleh Dokter Jaga dan Perawat Jaga yang bertugas aktif pada shift terkait untuk keperluan diagnosis dan terapi langsung pasien.
+c. Anonimisasi & Data Sintetis di Repositori:
+   - Dilarang keras mengunggah nama asli pasien, NIK kependudukan, atau nomor telepon pribadi ke repositori publik GitHub DelCare Copilot.
+   - Seluruh pengujian sistem RAG, prompt LLM, dan benchmarking wajib menggunakan data pseudonim atau data sintetis (misal: Pasien P-01, Mahasiswa A, Dokter D1).
+d. Kerahasiaan Rekomendasi Rujukan: Informasi surat rujukan ke RS Mitra hanya dikomunikasikan secara tertutup kepada pasien, keluarga/wali sah mahasiswa, dan dokter penerima di IGD rumah sakit rujukan.
+e. Keamanan Basis Data Vektor: Embeddings yang disimpan pada ChromaDB hanya mengekstraksi klausul SOP dan pedoman institusi, dilarang menyimpan riwayat konsultasi individual tanpa proses sanitasi identitas pribadi (de-identification).

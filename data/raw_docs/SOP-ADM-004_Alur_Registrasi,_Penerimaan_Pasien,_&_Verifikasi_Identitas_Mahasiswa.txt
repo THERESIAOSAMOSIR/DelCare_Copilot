@@ -1,0 +1,33 @@
+KODE DOKUMEN: SOP-ADM-004
+JUDUL: SOP-ADM-004: Alur Registrasi, Penerimaan Pasien, & Verifikasi Identitas Mahasiswa
+KATEGORI: Administrasi & Penerimaan
+TARGET AKSI DELCARE: REGISTRASI_TERVERIFIKASI / TRIASE_INSPECTION
+REFERENSI TERBUKA: Permenkes No. 24 Tahun 2022 tentang Rekam Medis Elektronik
+TAUTAN RESMI: https://peraturan.bpk.go.id/Details/245544/permenkes-no-24-tahun-2022
+TAUTAN ALTERNATIF: https://peraturan.bpk.go.id/Details/117304/permenkes-no-9-tahun-2014
+======================================================================
+
+POLIKLINIK INSTITUT TEKNOLOGI DEL
+STANDAR OPERASIONAL PROSEDUR: REGISTRASI & VERIFIKASI IDENTITAS PASIEN
+Nomor Dokumen: SOP-ADM-004 | Revisi: 01 | Tanggal Efektif: 14 Oktober 2026
+
+1. TUJUAN
+Standarisasi alur penerimaan pasien, validasi nomor induk mahasiswa/staf (NIM/NIDN), serta pembukaan rekam medis sebelum proses konsultasi medis.
+
+2. RUANG LINGKUP
+Pendaftaran seluruh pasien di front office Poliklinik Kampus IT Del, Sitoluama, Laguboti.
+
+3. DASAR HUKUM
+- Permenkes No. 24 Tahun 2022 tentang Rekam Medis. Sumber terbuka: https://peraturan.bpk.go.id/Details/245544/permenkes-no-24-tahun-2022
+- UU No. 27 Tahun 2022 tentang Pelindungan Data Pribadi (Pasal 4 dan Pasal 16 mengenai pemrosesan data spesifik kesehatan).
+
+4. PROSEDUR REGISTRASI
+a. Pasien menunjukkan Kartu Tanda Mahasiswa (KTM) atau Kartu Pegawai IT Del.
+b. Petugas Administrasi / Perawat Jaga mencocokkan identitas pada sistem informasi klinik kampus.
+c. Skrining Cepat Visual (Visual Triage Inspection):
+   - Jika pasien datang dengan tampak sesak berat, berdarah deras, pingsan, atau digotong -> Langsung lewati meja registrasi, antarkan ke Ruang Resusitasi (SOP-TRG-001). Administrasi diselesaikan kemudian oleh rekan/pengantar.
+   - Jika pasien stabil -> Lanjutkan pengisian formulir keluhan dan alokasikan nomor urut antrean triase.
+d. Dokumentasi rekam medis mencatat: Tanggal/waktu datang, nama lengkap, NIM/NIP, asrama/alamat tinggal, nomor kontak darurat wali/keluarga, keluhan utama.
+
+5. INTEGRASI DELCARE COPILOT
+Merupakan simpul pangkal PENDAFTARAN dalam graf ruang keadaan yang melakukan transisi ke node TRIASE.

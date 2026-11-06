@@ -1,0 +1,33 @@
+KODE DOKUMEN: SOP-FAR-011
+JUDUL: SOP-FAR-011: Penyimpanan & Pemberian Obat Kedaruratan Terbatas di Klinik Kampus
+KATEGORI: Farmasi & Obat Emergensi
+TARGET AKSI DELCARE: DISPENSING_OBAT_DARURAT / VERIFIKASI_DOKTER
+REFERENSI TERBUKA: Standar Pelayanan Kefarmasian di Klinik - Permenkes RI No. 34 Tahun 2021
+TAUTAN RESMI: https://peraturan.bpk.go.id/Details/117304/permenkes-no-9-tahun-2014
+TAUTAN ALTERNATIF: https://peraturan.bpk.go.id/Details/258028/uu-no-17-tahun-2023
+======================================================================
+
+POLIKLINIK INSTITUT TEKNOLOGI DEL
+STANDAR OPERASIONAL PROSEDUR: PENGELOLAAN & DISPENSING OBAT KEDARURATAN
+Nomor Dokumen: SOP-FAR-011 | Revisi: 01 | Tanggal Efektif: 14 Oktober 2026
+
+1. TUJUAN
+Menjamin ketersediaan, keamanan penyimpanan, serta rasionalitas pemberian obat-obatan darurat dan esensial di Poliklinik IT Del.
+
+2. RUANG LINGKUP
+Lemari obat darurat (Emergency Trolley / Kit) dan apotek perantara Poliklinik IT Del.
+
+3. KEWENANGAN PEMBERIAN OBAT
+a. Obat Keras (Daftar G) dan Injeksi Darurat hanya boleh diberikan atas instruksi tertulis atau lisan langsung dari Dokter Jaga yang sedang bertugas aktif (D1, D2, atau D3).
+b. Perawat Jaga (N1-N6) bertanggung jawab dalam prinsip 7 Benar Pemberian Obat: Benar Pasien, Benar Obat, Benar Dosis, Benar Rute/Cara, Benar Waktu, Benar Dokumentasi, dan Benar Informasi.
+
+4. DAFTAR OBAT RESUSITASI DARURAT WAJIB
+a. Epinefrin (Adrenalin) ampul 1 mg/ml: Khusus untuk anafilaksis dan henti jantung.
+b. Dexamethasone / Diphenhydramine ampul: Alergi akut dan pencegahan bronkospasme.
+c. Salbutamol ampul inhalasi: Terapi asma bronkial.
+d. Lidokain 2% ampul: Anestesi lokal penjahitan luka.
+e. Cairan Kristaloid: Ringer Laktat, NaCl 0.9%, Dextrose 5% dan Dextrose 40%.
+f. Analgetik Oral dan Antipiretik: Paracetamol tablet 500 mg, Ibuprofen 400 mg.
+
+5. INSPEKSI KELAYAKAN OBAT
+Perawat Jaga shift pagi wajib melakukan pengecekan tanggal kedaluwarsa (expired date) dan kelengkapan gembok troli emergensi setiap hari Senin.
