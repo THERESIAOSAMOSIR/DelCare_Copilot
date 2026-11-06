@@ -1,13 +1,12 @@
 """
 src/knowledge/chunking.py
 Modul ingestion dan pemotongan dokumen SOP Poliklinik DelCare Copilot.
-Menerapkan word-aware recursive chunking dengan overlap dan ekstraksi metadata terstruktur.
 """
 
-from dataclasses import dataclass
 import os
 import re
-from typing import Any, Dict, List
+from dataclasses import dataclass
+from typing import Any
 
 
 @dataclass
@@ -18,13 +17,13 @@ class DocumentChunk:
     category: str
     target_action: str
     text: str
-    metadata: Dict[str, Any]
+    metadata: dict[str, Any]
 
 
-def parse_sop_file(filepath: str) -> Dict[str, Any]:
+def parse_sop_file(filepath: str) -> dict[str, Any]:
     """Membaca berkas SOP .txt dan memisahkan metadata header dengan isi teks."""
-    with open(filepath, "r", encoding="utf-8") as f:
-        raw_content = f.read()
+    with open(filepath, "r", encoding="utf-8") as file:
+        raw_content = file.read()
 
     header_pattern = re.compile(
         r"KODE DOKUMEN:\s*(.*?)\n"
@@ -50,95 +49,130 @@ def parse_sop_file(filepath: str) -> Dict[str, Any]:
             "alt_ref": match.group(7).strip(),
             "body": match.group(8).strip(),
         }
-    else:
-        doc_id = os.path.basename(filepath).split("_")[0]
-        return {
-            "doc_id": doc_id,
-            "title": os.path.basename(filepath),
-            "category": "Umum",
-            "target_action": "PERIKSA",
-            "ref_title": "Internal",
-            "ref_url": "",
-            "alt_ref": "",
-            "body": raw_content.strip(),
-        }
+
+    return {
+        "doc_id": os.path.basename(filepath).split("_")[0],
+        "title": os.path.basename(filepath),
+        "category": "Umum",
+        "target_action": "PERIKSA",
+        "ref_title": "Internal",
+        "ref_url": "",
+        "alt_ref": "",
+        "body": raw_content.strip(),
+    }
 
 
-def chunk_text_recursive(
-    text: str, chunk_size: int = 500, chunk_overlap: int = 100
-) -> List[str]:
+def chunk_text_recursive(text: str, chunk_size: int = 500, chunk_overlap: int = 100) -> list[str]:
     """
-    Word-aware chunking dengan pembagian berdasarkan batas paragraf dan kalimat,
-    menjaga keutuhan konteks klinis dan klausul SOP.
+    Recursive word-aware chunking berbasis paragraf, kalimat, dan kata.
+
+    Ukuran chunk dan overlap dihitung dalam karakter. Setiap chunk tidak
+    melebihi chunk_size.
     """
-    paragraphs = [p.strip() for p in text.split("\n\n") if p.strip()]
-    chunks = []
-    current_chunk = ""
+    if chunk_size <= 0:
+        raise ValueError("chunk_size harus lebih besar dari 0")
+    if chunk_overlap < 0:
+        raise ValueError("chunk_overlap tidak boleh negatif")
+    if chunk_overlap >= chunk_size:
+        raise ValueError("chunk_overlap harus lebih kecil dari chunk_size")
 
-    for para in paragraphs:
-        if len(current_chunk) + len(para) + 2 <= chunk_size:
-            current_chunk = f"{current_chunk}\n\n{para}".strip()
-        else:
-            if current_chunk:
-                chunks.append(current_chunk)
-            words = current_chunk.split()
-            overlap_prefix = " ".join(words[-15:]) if len(words) >= 15 else current_chunk
+    separators = ["\n\n", "\n", r"(?<=[.!?])\s+", " "]
 
-            if len(para) > chunk_size:
-                sentences = re.split(r"(?<=[.!?])\s+", para)
-                sub_chunk = overlap_prefix
-                for sentence in sentences:
-                    if len(sub_chunk) + len(sentence) + 1 <= chunk_size:
-                        sub_chunk = f"{sub_chunk} {sentence}".strip()
-                    else:
-                        if sub_chunk:
-                            chunks.append(sub_chunk)
-                        sub_chunk = sentence
-                current_chunk = sub_chunk
+    def split_recursive(value: str, separator_index: int = 0) -> list[str]:
+        value = value.strip()
+        if not value:
+            return []
+        if len(value) <= chunk_size:
+            return [value]
+        if separator_index >= len(separators):
+            return [value[start : start + chunk_size] for start in range(0, len(value), chunk_size)]
+
+        separator = separators[separator_index]
+        parts = (
+            re.split(separator, value) if separator.startswith("(?<=") else value.split(separator)
+        )
+        parts = [part.strip() for part in parts if part.strip()]
+        if len(parts) <= 1:
+            return split_recursive(value, separator_index + 1)
+
+        result: list[str] = []
+        for part in parts:
+            if len(part) <= chunk_size:
+                result.append(part)
             else:
-                current_chunk = f"{overlap_prefix}\n\n{para}".strip() if overlap_prefix else para
+                result.extend(split_recursive(part, separator_index + 1))
+        return result
 
-    if current_chunk:
-        chunks.append(current_chunk)
+    def get_overlap(value: str) -> str:
+        words = value.split()
+        selected: list[str] = []
+        length = 0
+        for word in reversed(words):
+            additional_length = len(word) + (1 if selected else 0)
+            if length + additional_length > chunk_overlap:
+                break
+            selected.insert(0, word)
+            length += additional_length
+        return " ".join(selected)
 
+    chunks: list[str] = []
+    current = ""
+    for part in split_recursive(text):
+        candidate = f"{current} {part}".strip()
+        if not current:
+            current = part
+        elif len(candidate) <= chunk_size:
+            current = candidate
+        else:
+            chunks.append(current)
+            current = f"{get_overlap(current)} {part}".strip()
+            if len(current) > chunk_size:
+                current = part
+
+    if current:
+        chunks.append(current)
     return chunks
 
 
 def load_and_chunk_corpus(
     directory_path: str, chunk_size: int = 500, chunk_overlap: int = 100
-) -> List[DocumentChunk]:
-    """Memuat seluruh berkas korpus dari direktori dan menghasilkan daftar DocumentChunk."""
-    all_chunks: List[DocumentChunk] = []
+) -> list[DocumentChunk]:
+    """Memuat seluruh berkas korpus dan menghasilkan daftar DocumentChunk."""
+    all_chunks: list[DocumentChunk] = []
 
     for filename in sorted(os.listdir(directory_path)):
-        if filename.endswith(".txt"):
-            full_path = os.path.join(directory_path, filename)
-            parsed = parse_sop_file(full_path)
-            text_chunks = chunk_text_recursive(
-                parsed["body"], chunk_size=chunk_size, chunk_overlap=chunk_overlap
-            )
+        if not filename.endswith(".txt"):
+            continue
 
-            for idx, t_chunk in enumerate(text_chunks):
-                c_id = f"{parsed['doc_id']}_c{idx+1:02d}"
-                metadata = {
-                    "doc_id": parsed["doc_id"],
-                    "title": parsed["title"],
-                    "category": parsed["category"],
-                    "target_action": parsed["target_action"],
-                    "ref_url": parsed["ref_url"],
-                    "chunk_index": idx + 1,
-                    "total_chunks": len(text_chunks),
-                }
-                all_chunks.append(
-                    DocumentChunk(
-                        chunk_id=c_id,
-                        doc_id=parsed["doc_id"],
-                        title=parsed["title"],
-                        category=parsed["category"],
-                        target_action=parsed["target_action"],
-                        text=t_chunk,
-                        metadata=metadata,
-                    )
+        full_path = os.path.join(directory_path, filename)
+        parsed = parse_sop_file(full_path)
+        text_chunks = chunk_text_recursive(
+            parsed["body"],
+            chunk_size=chunk_size,
+            chunk_overlap=chunk_overlap,
+        )
+
+        for index, text_chunk in enumerate(text_chunks):
+            chunk_id = f"{parsed['doc_id']}_c{index + 1:02d}"
+            metadata = {
+                "doc_id": parsed["doc_id"],
+                "title": parsed["title"],
+                "category": parsed["category"],
+                "target_action": parsed["target_action"],
+                "ref_url": parsed["ref_url"],
+                "chunk_index": index + 1,
+                "total_chunks": len(text_chunks),
+            }
+            all_chunks.append(
+                DocumentChunk(
+                    chunk_id=chunk_id,
+                    doc_id=parsed["doc_id"],
+                    title=parsed["title"],
+                    category=parsed["category"],
+                    target_action=parsed["target_action"],
+                    text=text_chunk,
+                    metadata=metadata,
                 )
+            )
 
     return all_chunks

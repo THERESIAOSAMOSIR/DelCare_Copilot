@@ -43,7 +43,7 @@ delcare-copilot/
 │       ├── vector_store.py   # Persistent ChromaDB client & Sentence-Transformers
 │       └── retriever.py      # Semantic vector search & relevance threshold guardrail
 ├── benchmarks/
-│   └── run_semantic_eval.py  # Tolok ukur 6 kueri bisnis & analisis penolakan OOD
+│   └── run_semantic_eval.py  # Tolok ukur 8 kueri bisnis & analisis penolakan OOD
 └── tests/
     ├── test_chunking.py      # Pengujian unit chunking & boundary preservation
     ├── test_vector_store.py  # Pengujian persistensi ChromaDB
@@ -71,6 +71,14 @@ uv run python -m benchmarks.run_semantic_eval
 # Menjalankan seluruh rangkaian tes otomatis
 uv run pytest -v
 ```
+
+### Relevance Threshold
+
+Sistem menggunakan cosine similarity dengan threshold awal 0.35.
+Query dengan skor similarity terbaik di bawah threshold dikategorikan
+sebagai out-of-domain dan ditolak oleh relevance guardrail. Nilai ini
+dievaluasi menggunakan query relevan, ambigu, dan out-of-domain pada
+benchmark semantic evaluation.
 
 ### Rilis
 Tag rilis Milestone 3:

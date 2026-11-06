@@ -1,10 +1,12 @@
 """
 benchmarks/run_semantic_eval.py
-Tolok ukur (benchmarking) 6 kueri bisnis untuk evaluasi akurasi temu balik
+Tolok ukur (benchmarking) 8 kueri bisnis untuk evaluasi akurasi temu balik
 dan presisi penolakan kueri out-of-domain (Milestone 3).
 """
 
+import csv
 import os
+
 from src.knowledge.chunking import load_and_chunk_corpus
 from src.knowledge.retriever import SemanticRetriever
 from src.knowledge.vector_store import DelCareVectorStore
@@ -40,19 +42,54 @@ BENCHMARK_QUERIES = [
     },
     {
         "id": "Q5",
+        "type": "Ambigu / Relevan",
+        "query": "Mahasiswa tiba-tiba lemas dan hampir tidak sadar saat kegiatan lapangan",
+        "expected_doc": "SOP-MED-008",
+        "expected_ood": False,
+    },
+    {
+        "id": "Q6",
+        "type": "Ambigu / Relevan",
+        "query": "Napas terasa berat setelah aktivitas olahraga di kampus",
+        "expected_doc": "SOP-MED-007",
+        "expected_ood": False,
+    },
+    {
+        "id": "Q7",
         "type": "Out-of-Domain (OOD)",
         "query": "Bagaimana jadwal pembayaran cicilan uang kuliah tunggal di IT Del?",
         "expected_doc": "NONE",
         "expected_ood": True,
     },
     {
-        "id": "Q6",
+        "id": "Q8",
         "type": "Out-of-Domain (OOD)",
         "query": "Resep bumbu memasak arsik ikan mas khas tradisional Batak Toba",
         "expected_doc": "NONE",
         "expected_ood": True,
     },
 ]
+
+
+def save_benchmark_results(results: list[dict[str, object]]) -> None:
+    os.makedirs("benchmarks/results", exist_ok=True)
+    output_path = "benchmarks/results/semantic_evaluation.csv"
+    fieldnames = [
+        "id",
+        "type",
+        "query",
+        "expected_doc",
+        "retrieved_doc",
+        "expected_ood",
+        "is_out_of_domain",
+        "similarity",
+        "status",
+    ]
+    with open(output_path, "w", newline="", encoding="utf-8") as file:
+        writer = csv.DictWriter(file, fieldnames=fieldnames)
+        writer.writeheader()
+        writer.writerows(results)
+    print(f"Hasil benchmark tersimpan di: {output_path}")
 
 
 def run_benchmark():
@@ -78,8 +115,11 @@ def run_benchmark():
     correct_ood_rejections = 0
     total_relevant = sum(1 for q in BENCHMARK_QUERIES if not q["expected_ood"])
     total_ood = sum(1 for q in BENCHMARK_QUERIES if q["expected_ood"])
+    benchmark_results: list[dict[str, object]] = []
 
-    header = f"{'ID':<4} | {'Tipe Kueri':<22} | {'Cosine Sim':<10} | {'Status':<14} | {'Top-1 Target'}"
+    header = (
+        f"{'ID':<4} | {'Tipe Kueri':<22} | {'Cosine Sim':<10} | {'Status':<14} | {'Top-1 Target'}"
+    )
     print(header)
     print("-" * 82)
 
@@ -100,16 +140,32 @@ def run_benchmark():
                 correct_ood_rejections += 1
             status_label = "DITOLAK (OOD)" if is_correct else "LOLOS_PALSU"
 
+        benchmark_results.append(
+            {
+                "id": q["id"],
+                "type": q["type"],
+                "query": q["query"],
+                "expected_doc": q["expected_doc"],
+                "retrieved_doc": retrieved_doc,
+                "expected_ood": q["expected_ood"],
+                "is_out_of_domain": res["is_out_of_domain"],
+                "similarity": sim_score,
+                "status": status_label,
+            }
+        )
         print(
             f"{q['id']:<4} | {q['type']:<22} | {sim_score:<10.4f} | {status_label:<14} | {retrieved_doc}"
         )
 
     acc = (correct_retrievals / total_relevant) * 100 if total_relevant > 0 else 0
-    ood_prec = (correct_ood_rejections / total_ood) * 100 if total_ood > 0 else 0
+    ood_accuracy = (correct_ood_rejections / total_ood) * 100 if total_ood > 0 else 0
 
     print("-" * 82)
     print(f"Akurasi Temu Balik Relevan : {acc:.1f}% ({correct_retrievals}/{total_relevant})")
-    print(f"Presisi Penolakan Kueri OOD : {ood_prec:.1f}% ({correct_ood_rejections}/{total_ood})")
+    print(
+        f"Akurasi Penolakan Kueri OOD : {ood_accuracy:.1f}% ({correct_ood_rejections}/{total_ood})"
+    )
+    save_benchmark_results(benchmark_results)
     print("=" * 82)
 
 
