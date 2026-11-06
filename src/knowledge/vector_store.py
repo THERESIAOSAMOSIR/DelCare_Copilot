@@ -20,7 +20,7 @@ class DelCareVectorStore:
         self,
         persist_directory: str = "data/chroma_db",
         collection_name: str = "delcare_knowledge_base",
-        model_name: str = "all-MiniLM-L6-v2",
+        model_name: str = "paraphrase-multilingual-MiniLM-L12-v2",
     ):
         self.persist_directory = persist_directory
         self.collection_name = collection_name

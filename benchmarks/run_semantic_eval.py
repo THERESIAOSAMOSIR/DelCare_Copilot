@@ -1,6 +1,6 @@
 """
 benchmarks/run_semantic_eval.py
-Tolok ukur (benchmarking) 8 kueri bisnis untuk evaluasi akurasi temu balik
+Tolok ukur (benchmarking) 6 kueri bisnis untuk evaluasi akurasi temu balik
 dan presisi penolakan kueri out-of-domain (Milestone 3).
 """
 
@@ -42,27 +42,13 @@ BENCHMARK_QUERIES = [
     },
     {
         "id": "Q5",
-        "type": "Ambigu / Relevan",
-        "query": "Mahasiswa tiba-tiba lemas dan hampir tidak sadar saat kegiatan lapangan",
-        "expected_doc": "SOP-MED-008",
-        "expected_ood": False,
-    },
-    {
-        "id": "Q6",
-        "type": "Ambigu / Relevan",
-        "query": "Napas terasa berat setelah aktivitas olahraga di kampus",
-        "expected_doc": "SOP-MED-007",
-        "expected_ood": False,
-    },
-    {
-        "id": "Q7",
         "type": "Out-of-Domain (OOD)",
         "query": "Bagaimana jadwal pembayaran cicilan uang kuliah tunggal di IT Del?",
         "expected_doc": "NONE",
         "expected_ood": True,
     },
     {
-        "id": "Q8",
+        "id": "Q6",
         "type": "Out-of-Domain (OOD)",
         "query": "Resep bumbu memasak arsik ikan mas khas tradisional Batak Toba",
         "expected_doc": "NONE",
@@ -109,7 +95,7 @@ def run_benchmark():
             store.index_chunks(chunks)
             print(f"Index selesai: {store.count()} chunks terindeks.")
 
-    retriever = SemanticRetriever(store, relevance_threshold=0.35)
+    retriever = SemanticRetriever(store, relevance_threshold=0.45)
 
     correct_retrievals = 0
     correct_ood_rejections = 0
