@@ -1,0 +1,32 @@
+KODE DOKUMEN: SOP-MED-009
+JUDUL: SOP-MED-009: Tatalaksana Trauma Fisik, Fraktur Tulang, & Cedera Olahraga Kampus
+KATEGORI: Protokol Tindakan Medis
+TARGET AKSI DELCARE: PEMBIDAIAAN_BEBAT / HEATING_WOUND / RUJUK_ORTOPEDI
+REFERENSI TERBUKA: Pedoman Penanganan Trauma & Basic Trauma Cardiac Life Support (BTCLS) Fasyankes
+TAUTAN RESMI: https://peraturan.bpk.go.id/Details/258028/uu-no-17-tahun-2023
+TAUTAN ALTERNATIF: https://peraturan.bpk.go.id/Details/308445/permenkes-no-16-tahun-2024
+======================================================================
+
+POLIKLINIK INSTITUT TEKNOLOGI DEL
+STANDAR OPERASIONAL PROSEDUR: TATALAKSANA TRAUMA & CEDERA EKSTREMITAS
+Nomor Dokumen: SOP-MED-009 | Revisi: 02 | Tanggal Efektif: 14 Oktober 2026
+
+1. TUJUAN
+Standarisasi penanganan cedera muskuloskeletal, luka robek, dan patah tulang pada mahasiswa saat olahraga, praktikum bengkel/lab, atau kecelakaan di lingkungan kampus.
+
+2. RUANG LINGKUP
+Unit Tindakan Bedah Minor dan Ruang Rawat Darurat Poliklinik IT Del.
+
+3. PRINSIP PENANGANAN TRAUMA & FRAKTUR
+a. Proteksi Tulang Leher (Cervical Spine): Pada korban jatuh dari ketinggian > 2 meter atau kecelakaan bermotor, pasang Cervical Collar kaku sebelum memindahkan pasien.
+b. Penanganan Perdarahan:
+   - Luka lecet: Irigasi larutan NaCl 0.9%, oleskan antiseptik povidone iodine, tutup kassa steril.
+   - Luka robek (vulnus laceratum): Cuci bersih anestesi lokal lidokain 2%, lakukan penjahitan situasi jika luka bersih di bawah kewenangan dokter umum fasyankes primer.
+   - Perdarahan aktif memancar: Bebat tekan langsung (direct pressure), dilarang menggunakan torniket tanpa indikasi amputasi traumatik.
+c. Pembidaian Fraktur (Splinting):
+   - Pasang bidai rigid meliputi minimal dua sendi (sendi proksimal dan sendi distal dari tulang yang patah).
+   - Jangan mencoba mereposisi tulang yang menonjol keluar pada fraktur terbuka (cukup tutup dengan kassa steril basah NaCl).
+   - Periksa Pulsasi, Sensibilitas motorik, dan Capillary Refill Time (PMS/CRT) sebelum dan sesudah pemasangan bidai.
+d. Keputusan Rujukan:
+   - Fraktur terbuka (Open Fracture): Masuk Triase MERAH, berikan ATS/Tetanus Toxoid profilaksis, rujuk segera ke RS_A (RSUD Porsea).
+   - Fraktur tertutup stabil dengan nyeri terkontrol: Masuk Triase KUNING, rujuk ke RS_B (RS HKBP Balige) untuk tindakan foto Rontgen X-ray dan konsultasi Dokter Spesialis Orthopedi.

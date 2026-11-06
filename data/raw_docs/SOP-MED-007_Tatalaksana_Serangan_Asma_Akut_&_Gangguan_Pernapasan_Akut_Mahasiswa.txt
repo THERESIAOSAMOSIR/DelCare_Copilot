@@ -1,0 +1,39 @@
+KODE DOKUMEN: SOP-MED-007
+JUDUL: SOP-MED-007: Tatalaksana Serangan Asma Akut & Gangguan Pernapasan Akut Mahasiswa
+KATEGORI: Protokol Tindakan Medis
+TARGET AKSI DELCARE: NEBULISASI_OKSIGEN / PEMANTAUAN_RESPIRASI
+REFERENSI TERBUKA: Panduan Praktik Klinis Dokter Fasyankes Primer - Kemenkes RI (KMK HK.01.07/MENKES/1186/2022)
+TAUTAN RESMI: https://peraturan.bpk.go.id/Details/117304/permenkes-no-9-tahun-2014
+TAUTAN ALTERNATIF: https://peraturan.bpk.go.id/Details/308445/permenkes-no-16-tahun-2024
+======================================================================
+
+POLIKLINIK INSTITUT TEKNOLOGI DEL
+STANDAR OPERASIONAL PROSEDUR: TATALAKSANA SERANGAN ASMA AKUT
+Nomor Dokumen: SOP-MED-007 | Revisi: 02 | Tanggal Efektif: 14 Oktober 2026
+
+1. TUJUAN
+Memberikan panduan baku penanganan serangan asma bronkial akut dan bronkospasme pada mahasiswa di kampus IT Del guna mencegah gagal napas akut.
+
+2. RUANG LINGKUP
+Seluruh pasien dengan keluhan sesak napas mendadak, mengi (wheezing), dan riwayat asma yang datang ke Poliklinik IT Del.
+
+3. REFERENSI KLINIS
+- Keputusan Menteri Kesehatan RI tentang Panduan Praktik Klinis Penanganan Asma Bronkial di Fasilitas Tingkat Pertama.
+- Global Initiative for Asthma (GINA) Guidelines on Acute Asthma Management in Primary Care.
+
+4. KLASIFIKASI DERAJAT SERANGAN ASMA
+a. Serangan Ringan: Pasien bisa berbicara dalam kalimat penuh, nadi < 100 x/menit, SpO2 > 95%, tidak ada retraksi otot dada.
+b. Serangan Sedang (Triase KUNING): Pasien berbicara terputus-putus per frasa/kata, nadi 100-120 x/menit, SpO2 91-95%, tampak retraksi interkostal.
+c. Serangan Berat / Mengancam Jiwa (Triase MERAH): Pasien tidak mampu berbicara, posisi membungkuk (tripod position), sianosis, SpO2 < 90%, silent chest (tidak terdengar suara napas), bradikardia atau penurunan kesadaran.
+
+5. LANGKAH-LANGKAH TATALAKSANA KLINIS
+a. Posisi: Posisikan pasien duduk tegak atau setengah duduk nyaman (fowler/semi-fowler).
+b. Oksigenasi: Berikan kanul nasal 2-4 L/menit atau sungkup muka untuk menjaga SpO2 >= 94%.
+c. Terapi Nebulisasi:
+   - Berikan inhalasi Short-Acting Beta-2 Agonist (Salbutamol 2.5 mg) via nebulizer elektrik kompresor selama 10-15 menit.
+   - Pada serangan sedang-berat, dapat dikombinasikan dengan Ipratropium Bromida 0.5 mg.
+   - Nebulisasi dapat diulang tiap 20 menit hingga 3 siklus dalam 1 jam pertama di bawah pengawasan Dokter Jaga.
+d. Kortikosteroid Sistemik: Berikan Metilprednisolon 40-60 mg IV atau Prednison oral 40 mg untuk mengatasi inflamasi dinding bronkus.
+e. Evaluasi Respon:
+   - Respons Baik: Gejala hilang, SpO2 > 95%, auskultasi paru vesikuler -> Observasi 1 jam, boleh pulang rawat jalan dengan bekal inhaler dan obat oral.
+   - Respons Buruk / Tidak Membaik dalam 30-45 menit -> Pasang IV line, segera alihkan ke protokol rujukan gawat darurat ke RS_A (Porsea).

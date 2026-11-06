@@ -1,0 +1,43 @@
+KODE DOKUMEN: SOP-TRG-003
+JUDUL: SOP-TRG-003: Triase Prioritas HIJAU & Pelayanan Rawat Jalan Mandiri (Non-Urgent)
+KATEGORI: Triase & Layanan Rawat Jalan
+TARGET AKSI DELCARE: SELESAI_RAWAT_JALAN / EDUKASI_MANDIRI
+REFERENSI TERBUKA: Permenkes No. 9 Tahun 2014 tentang Pelayanan Klinik Pratama & Fasyankes
+TAUTAN RESMI: https://peraturan.bpk.go.id/Details/117304/permenkes-no-9-tahun-2014
+TAUTAN ALTERNATIF: https://peraturan.bpk.go.id/Read/108103/Permenkes%20Nomor%209%20Tahun%202014.pdf
+======================================================================
+
+POLIKLINIK INSTITUT TEKNOLOGI DEL
+STANDAR OPERASIONAL PROSEDUR: TRIASE PRIORITAS HIJAU (NON-URGENT)
+Nomor Dokumen: SOP-TRG-003 | Revisi: 02 | Tanggal Efektif: 14 Oktober 2026
+
+1. TUJUAN
+Mengatur tata laksana pelayanan medis bagi pasien rawat jalan dengan kondisi ringan, stabil, dan tidak membahayakan keselamatan pasien, guna memastikan penanganan rawat jalan mandiri yang efisien dan rasional.
+
+2. RUANG LINGKUP
+Berlaku pada jam operasional klinik (Shift Pagi: 08.00-12.00 WIB, Shift Sore: 13.00-17.00 WIB) untuk kasus non-emergensi seluruh mahasiswa dan staf IT Del.
+
+3. DASAR HUKUM
+- Peraturan Menteri Kesehatan RI Nomor 9 Tahun 2014 tentang Klinik. Sumber terbuka: https://peraturan.bpk.go.id/Details/117304/permenkes-no-9-tahun-2014
+- Keputusan Menteri Kesehatan RI tentang Panduan Praktik Klinis Bagi Dokter di Fasyankes Tingkat Pertama (FKTP).
+
+4. KRITERIA KLINIS KATEGORI HIJAU
+Pasien dikategorikan prioritas HIJAU jika:
+a. Tanda-Tanda Vital Normal: Tekanan darah 100-130/70-85 mmHg, denyut nadi 60-90 kali/menit teratur, pernapasan 14-20 kali/menit tanpa sesak, suhu 36.5 - 37.5 C.
+b. Kesadaran: Compos mentis penuh (GCS 15).
+c. Keluhan Ringan Tanpa Red Flags:
+   - ISPA ringan (batuk pilek tanpa sesak, faringitis ringan).
+   - Gangguan dispepsia ringan / perut kembung tanpa tanda akut abdomen.
+   - Nyeri otot ringan (mialgia / fatigue) akibat aktivitas fisik normal.
+   - Luka lecet superfisial (ekskoriasi kulit) yang tidak memerlukan penjahitan.
+   - Permintaan surat keterangan sakit istirahat atau kontrol obat rutin.
+
+5. PROSEDUR PELAYANAN
+a. Pasien mengambil antrean di loket administrasi dan menunggu di ruang tunggu umum. Waktu tunggu target < 30 menit.
+b. Perawat (N1-N6) memanggil pasien, mencatat keluhan utama dan mengukur tanda vital pada form rekam medis klinik.
+c. Dokter Jaga (D1-D3) melakukan anamnesis terstruktur, pemeriksaan fisik sederhana, dan penegakan diagnosis kerja.
+d. Resep dan Edukasi: Dokter memberikan terapi simtomatik oral (paracetamol, antasida, antihistamin) dari persediaan farmasi klinik, edukasi hidrasi, dan istirahat asrama jika diperlukan (maksimal surat istirahat 1-2 hari).
+e. Penutupan Kasus: Kasus diselesaikan secara tuntas di poliklinik tanpa rujukan eksternal.
+
+6. INTEGRASI DELCARE COPILOT
+Sistem memetakan jalur: PENDAFTARAN -> TRIASE -> TRIASE_HIJAU -> PERIKSA_HIJAU -> KEPUTUSAN_RAWAT_JALAN -> SELESAI_RAWAT_JALAN (total biaya 23 menit-ekuivalen). Tidak ada alur rujukan rumah sakit yang diaktifkan.

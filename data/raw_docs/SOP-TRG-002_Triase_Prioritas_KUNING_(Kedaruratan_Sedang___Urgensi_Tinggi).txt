@@ -1,0 +1,45 @@
+KODE DOKUMEN: SOP-TRG-002
+JUDUL: SOP-TRG-002: Triase Prioritas KUNING (Kedaruratan Sedang / Urgensi Tinggi)
+KATEGORI: Triase Kedaruratan Medis
+TARGET AKSI DELCARE: OBSERVASI_KLINIK / RUJUK_RS_A_ATAU_RS_B
+REFERENSI TERBUKA: Pedoman Penyelenggaraan Pelayanan Kesehatan Rujukan & Triase Fasyankes Kemenkes RI
+TAUTAN RESMI: https://peraturan.bpk.go.id/Details/308445/permenkes-no-16-tahun-2024
+TAUTAN ALTERNATIF: https://sisrute.kemkes.go.id/
+======================================================================
+
+POLIKLINIK INSTITUT TEKNOLOGI DEL
+STANDAR OPERASIONAL PROSEDUR: TRIASE PRIORITAS KUNING (URGENSI TINGGI)
+Nomor Dokumen: SOP-TRG-002 | Revisi: 02 | Tanggal Efektif: 14 Oktober 2026
+
+1. TUJUAN
+Memberikan pedoman penanganan bagi pasien yang mengalami cedera atau penyakit akut dengan tingkat keparahan sedang, tidak mengancam jiwa seketika, namun berpotensi memburuk jika tidak ditangani dalam batas waktu respons maksimal 15 menit.
+
+2. RUANG LINGKUP
+Meliputi pasien di Poliklinik IT Del yang membutuhkan evaluasi intensif, observasi di ruang perawatan perantara, atau rujukan terencana ke RS Mitra (RS_A atau RS_B).
+
+3. DASAR HUKUM & REFERENSI
+- Permenkes RI Nomor 16 Tahun 2024 tentang Sistem Rujukan Pelayanan Kesehatan Perseorangan. Sumber terbuka: https://peraturan.bpk.go.id/Details/308445/permenkes-no-16-tahun-2024
+- Sistem Informasi Rujukan Terintegrasi (SISRUTE) Nasional Kementerian Kesehatan RI. Sumber: https://sisrute.kemkes.go.id/
+- Standar Triase Australasian Triage Scale (ATS) Kategori 3 & Emergency Severity Index (ESI) Level 3.
+
+4. KRITERIA KLINIS KATEGORI KUNING
+Pasien dikategorikan prioritas KUNING apabila:
+a. Tanda Vital: Tekanan darah sistolik 140-180 mmHg atau diastolik 90-110 mmHg, frekuensi napas 24-32 kali/menit, frekuensi nadi 100-125 kali/menit, suhu tubuh > 38.5 C atau menggigil berat.
+b. Neurologis: Kesadaran apatis atau somnolen ringan, GCS 13-14, nyeri kepala hebat mendadak tanpa defisit neurologis fokal akut.
+c. Pernapasan & Sirkulasi: Serangan asma derajat sedang (dapat berbicara terputus-putus per kalimat, wheezing ekspirasi), nyeri dada terlokalisir non-kardiak, dehidrasi sedang dengan turgor kulit menurun.
+d. Trauma / Bedah: Fraktur tulang panjang tertutup (femur, tibia, humerus) dengan pulsasi distal teraba, dislokasi sendi mayor, luka laserasi dalam dengan perdarahan vena yang dapat dikontrol bebat tekan, luka bakar derajat II luas < 15%.
+
+5. PROSEDUR OPERASIONAL PENANGANAN
+a. Alokasi Ruang: Pasien dipindahkan ke Ruang Tindakan / Observasi maksimal dalam 10 menit setelah kedatangan.
+b. Pemeriksaan oleh Petugas:
+   - Perawat jaga melakukan asesmen tanda vital lengkap dan anamnesis riwayat keluhan.
+   - Dokter Jaga (D1-D3) melakukan pemeriksaan fisik terarah dalam 15 menit.
+c. Penatalaksanaan Medis Awal:
+   - Terapi suportif awal (nebulisasi salbutamol, hidrasi intravena cairan Ringer Laktat 500 ml dalam 2 jam, atau analgetik injeksi ketorolac/paracetamol sesuai indikasi).
+   - Pembidaian pada fraktur tertutup sebelum pergerakan lebih lanjut.
+d. Penentuan Jalur Layanan:
+   - Jika kondisi membaik dalam 60-120 menit observasi -> Pasien dialihkan ke jalur rawat jalan terkontrol.
+   - Jika kondisi menetap atau nyeri/gejala tidak teratasi -> Dokter memutuskan rujukan ke RS_A (Porsea) atau RS_B (HKBP Balige) bergantung pada kebutuhan dokter spesialis orthopedi/penyakit dalam.
+
+6. INTEGRASI DELCARE COPILOT
+Sistem memproses keadaan ke node TRIASE_KUNING -> PERIKSA_KUNING -> OBSERVASI_KUNING -> KEPUTUSAN_RUJUK_KUNING. Jika dirujuk, jalur optimal A* merekomendasikan rujukan RS_A (biaya 28 menit-ekuivalen).

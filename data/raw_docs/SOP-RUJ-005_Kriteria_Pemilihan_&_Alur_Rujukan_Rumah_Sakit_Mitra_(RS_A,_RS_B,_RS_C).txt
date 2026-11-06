@@ -1,0 +1,40 @@
+KODE DOKUMEN: SOP-RUJ-005
+JUDUL: SOP-RUJ-005: Kriteria Pemilihan & Alur Rujukan Rumah Sakit Mitra (RS_A, RS_B, RS_C)
+KATEGORI: Rujukan Eksternal
+TARGET AKSI DELCARE: PEMILIHAN_RS_MITRA / PENGIRIMAN_PASIEN
+REFERENSI TERBUKA: Permenkes No. 16 Tahun 2024 tentang Sistem Rujukan Pelayanan Kesehatan Perseorangan
+TAUTAN RESMI: https://peraturan.bpk.go.id/Details/308445/permenkes-no-16-tahun-2024
+TAUTAN ALTERNATIF: https://sisrute.kemkes.go.id/
+======================================================================
+
+POLIKLINIK INSTITUT TEKNOLOGI DEL
+STANDAR OPERASIONAL PROSEDUR: ALUR DAN KRITERIA RUJUKAN RS MITRA
+Nomor Dokumen: SOP-RUJ-005 | Revisi: 02 | Tanggal Efektif: 14 Oktober 2026
+
+1. TUJUAN
+Menstandarisasi pengambilan keputusan rujukan pasien dari Poliklinik IT Del ke fasilitas rujukan tingkat lanjutan (FKRTL) yang tepat guna meminimalkan risiko mortalitas dan morbiditas.
+
+2. RUANG LINGKUP
+Keputusan rujukan pasien rawat jalan maupun gawat darurat yang melampaui sarana prasarana dan kewenangan klinis Poliklinik IT Del.
+
+3. PROFIL DAN KRITERIA PEMILIHAN RUMAH SAKIT MITRA
+Klinik IT Del bekerja sama dengan tiga simpul rujukan hierarkis di sekitar Toba:
+a. Rumah Sakit Mitra A (RS_A / RSUD Porsea):
+   - Karakteristik: Jarak tempuh terdekat (sekitar 7-10 km, estimasi waktu 10-15 menit).
+   - Indikasi Utama: Kasus Triase MERAH (gawat darurat), henti jantung pasca-RJP awal, sesak napas gagal napas, syok hipovolemik, trauma luka tusuk/robek dengan perdarahan masif, apendisitis akut perforasi.
+   - Kebijakan Pemilihan: Prioritas mutlak untuk kasus kritis di mana keterlambatan menit berakibat fatal.
+b. Rumah Sakit Mitra B (RS_B / RS HKBP Balige):
+   - Karakteristik: Jarak menengah (sekitar 18-22 km, estimasi waktu 25-35 menit), fasilitas rawat inap dan dokter spesialis lengkap (Sp.B, Sp.PD, Sp.OG, Sp.A, Sp.OT).
+   - Indikasi Utama: Kasus Triase KUNING atau stabil yang membutuhkan rawat inap spesialis, fraktur tulang yang butuh tindakan definitif bedah ortopedi terencana, demam tifoid atau DHF hari ke-4 dengan trombositopenia progresif.
+c. Rumah Sakit Mitra C (RS_C / RS Rujukan Tersier / RSUD Tarutung / RSUP Medan):
+   - Karakteristik: Jarak jauh (> 50 km, waktu tempuh > 60-90 menit), rumah sakit kelas B/A dengan fasilitas bedah saraf, ICU subspesialistik, kateterisasi jantung.
+   - Indikasi Utama: Cedera otak traumatik berat dengan TIK meningkat, luka bakar luas > 40%, kasus bedah toraks khusus. Dihindari untuk kasus darurat akut tanpa stabilisasi mantap di RS_A/RS_B.
+
+4. PROSEDUR PENGAMBILAN KEPUTUSAN RUJUKAN
+a. Verifikasi Kriteria Klinis: Dokter Jaga mengevaluasi indikasi medis dan ketersediaan ambulans.
+b. Komunikasi Antar-Fasilitas (Pra-Rujukan): Perawat jaga menghubungi IGD rumah sakit tujuan via SISRUTE atau telepon darurat untuk memastikan ketersediaan bed, oksigen, dan dokter penanggung jawab.
+c. Kelengkapan Berkas: Menyiapkan Surat Rujukan (SOP-RUJ-005), fotokopi tanda pengenal pasien, lembar pemantauan tanda vital selama di klinik, dan fotokopi resep/terapi yang telah diberikan.
+d. Transportasi dan Serah Terima: Pasien didampingi perawat hingga serah terima di IGD penerima (formulir transfer pasien antar-fasilitas ditandatangani).
+
+5. INTEGRASI DELCARE COPILOT
+Sistem memodelkan biaya rujukan dengan menggabungkan waktu tempuh dan penalti klinis. Pada kasus MERAH, penalti jarak RS_C sangat tinggi (bobot 25), sehingga algoritma A* memilih RS_A (bobot 7) untuk menjamin keselamatan pasien.

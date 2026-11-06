@@ -1,0 +1,45 @@
+KODE DOKUMEN: SOP-TRG-001
+JUDUL: SOP-TRG-001: Skrining Awal & Triase Prioritas MERAH (Gawat Darurat / Resusitasi)
+KATEGORI: Triase Kedaruratan Medis
+TARGET AKSI DELCARE: RUJUK_SEGERA / RESUSITASI_CEPAT
+REFERENSI TERBUKA: Permenkes No. 47 Tahun 2018 tentang Pelayanan Kegawatdaruratan & WHO ETAT Guidelines
+TAUTAN RESMI: https://peraturan.bpk.go.id/Details/256656/perwali-kota-sawah-lunto-no-3-tahun-2021
+TAUTAN ALTERNATIF: https://www.afro.who.int/sites/default/files/2017-06/participant_manual.pdf
+======================================================================
+
+POLIKLINIK INSTITUT TEKNOLOGI DEL
+STANDAR OPERASIONAL PROSEDUR: TRIASE PRIORITAS MERAH (GAWAT DARURAT)
+Nomor Dokumen: SOP-TRG-001 | Revisi: 02 | Tanggal Efektif: 14 Oktober 2026
+
+1. TUJUAN
+Memastikan identifikasi dini dan penanganan seketika tanpa penundaan (response time 0 menit) bagi sivitas akademika IT Del yang mengalami ancaman kematian atau kecacatan permanen, serta memandu stabilisasi segera sebelum rujukan darurat ke Rumah Sakit Mitra terdekat (RS_A / RSUD Porsea).
+
+2. RUANG LINGKUP
+Berlaku di unit gawat darurat Poliklinik IT Del untuk seluruh mahasiswa, dosen, staf, dan tamu kampus yang tiba dengan tanda kegawatdaruratan mayor.
+
+3. DASAR HUKUM & STANDAR TERBUKA
+- Peraturan Menteri Kesehatan RI tentang Pelayanan Kegawatdaruratan dan Sistem Penanggulangan Gawat Darurat Terpadu (SPGDT). Sumber terbuka: https://peraturan.bpk.go.id/
+- World Health Organization (WHO) Emergency Triage Assessment and Treatment (ETAT). Sumber terbuka: https://www.afro.who.int/sites/default/files/2017-06/participant_manual.pdf
+- Undang-Undang Republik Indonesia Nomor 17 Tahun 2023 tentang Kesehatan. Sumber terbuka: https://peraturan.bpk.go.id/Details/258028/uu-no-17-tahun-2023
+
+4. DEFINISI & KRITERIA KLINIS TRIASE MERAH
+Kategori MERAH ditetapkan apabila pasien memenuhi minimal satu kriteria berikut:
+a. Jalan Napas (Airway): Obstruksi total atau parsial berat, stridor inspiratoar berat, trauma jalan napas masif.
+b. Pernapasan (Breathing): Henti napas (apnea), frekuensi napas > 35 kali/menit atau < 8 kali/menit, sianosis sentral (bibir dan kuku membiru), saturasi oksigen (SpO2) < 90% pada udara ruangan.
+c. Sirkulasi (Circulation): Henti jantung, nadi radialis tidak teraba atau sangat lemah dengan takikardia > 130 kali/menit atau bradikardia ekstrim < 45 kali/menit, tekanan darah sistolik < 80 mmHg (tanda syok sirkulasi), perdarahan masif tak terkontrol.
+d. Disabilitas Neurologis (Disability): Penurunan kesadaran koma atau sopor, skor Glasgow Coma Scale (GCS) <= 8, kejang aktif berkepanjangan (status epileptikus).
+
+5. PROSEDUR TINDAKAN OPERASIONAL
+a. Penerimaan Pasien: Petugas triase (Perawat N1-N6) langsung menempatkan pasien di Bed Resusitasi Kritis tanpa melalui antrean pendaftaran administratif.
+b. Intervensi Segera (0-5 Menit):
+   - Buka jalan napas dengan head-tilt chin-lift atau jaw-thrust jika dicurigai trauma leher.
+   - Pasang Oksigen konsentrasi tinggi via Non-Rebreathing Mask (NRM) 10-15 L/menit.
+   - Pasang akses intravena (IV line) ukuran 18G/20G dengan infus cairan kristaloid (NaCl 0.9% atau Ringer Laktat) grojok/cepat jika terindikasi syok hipovolemik.
+   - Dokter Jaga (D1-D3) memimpin resusitasi dan monitoring tanda vital per 3 menit.
+c. Aktivasi Protokol Rujukan Darurat:
+   - Dokter Jaga segera memutuskan rujukan gawat darurat ke RS_A (RSUD Porsea, estimasi jarak 10-15 menit).
+   - Perawat kedua menghubungi Unit Ambulans Kampus (SOP-EVK-006) dan melakukan pra-notifikasi ke IGD RS_A via telepon/SISRUTE.
+   - Pendampingan rujukan wajib didampingi 1 Dokter Jaga atau minimal 1 Perawat terlatih bersertifikasi BTCLS dengan membawa tas emergensi dan tabung oksigen portabel.
+
+6. INTEGRASI SISTEM DELCARE COPILOT
+Sistem mengklasifikasikan kueri/tanda klinis ini ke state TRIASE_MERAH. Actuator merekomendasikan transisi tercepat: PERIKSA_MERAH -> KEPUTUSAN_RUJUK_MERAH -> RUJUK_RS_A_MERAH dengan penalti risiko minimum (biaya 17 menit-ekuivalen). Draf surat rujukan otomatis diterbitkan.

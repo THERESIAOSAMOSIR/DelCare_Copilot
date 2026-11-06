@@ -1,0 +1,34 @@
+KODE DOKUMEN: SOP-OBS-010
+JUDUL: SOP-OBS-010: Protokol Ruang Observasi Sementara & Batas Waktu Pemantauan Klinik
+KATEGORI: Perawatan Sementara
+TARGET AKSI DELCARE: MONITORING_TANDA_VITAL / PULANG_ATAU_ELEVASI_RUJUK
+REFERENSI TERBUKA: Standar Pelayanan Tempat Tidur Perawatan Antara Klinik Pratama - Permenkes No. 9/2014
+TAUTAN RESMI: https://peraturan.bpk.go.id/Details/117304/permenkes-no-9-tahun-2014
+TAUTAN ALTERNATIF: https://peraturan.bpk.go.id/Read/108103/Permenkes%20Nomor%209%20Tahun%202014.pdf
+======================================================================
+
+POLIKLINIK INSTITUT TEKNOLOGI DEL
+STANDAR OPERASIONAL PROSEDUR: PEMANTAUAN RUANG OBSERVASI SEMENTARA
+Nomor Dokumen: SOP-OBS-010 | Revisi: 01 | Tanggal Efektif: 14 Oktober 2026
+
+1. TUJUAN
+Mengatur tata tertib perawatan sementara pasien di Poliklinik IT Del untuk memastikan kondisi pasien dipantau secara berkala sebelum diputuskan boleh kembali ke asrama atau harus dirujuk ke rumah sakit.
+
+2. RUANG LINGKUP
+Kapasitas 4 tempat tidur observasi harian di Poliklinik IT Del.
+
+3. BATAS WAKTU OBSERVASI
+a. Batas Waktu Standar: Maksimal durasi observasi di Poliklinik IT Del adalah 2 hingga 4 jam.
+b. Poliklinik IT Del bukan fasilitas rawat inap jangka panjang. Pasien dilarang diobservasi melebihi 6 jam berturut-turut tanpa keputusan rujukan definitif.
+
+4. PROTOKOL MONITORING PETUGAS JAGA
+a. Pemantauan Tanda Vital: Perawat Jaga (N1-N6) wajib mencatat tekanan darah, denyut nadi, laju napas, dan suhu tubuh setiap 30 menit pada lembar pemantauan observasi.
+b. Evaluasi Dokter Jaga: Dokter (D1-D3) melakukan re-evaluasi klinis pada akhir jam ke-1 dan jam ke-2 observasi.
+c. Kriteria Pemulangan (Discharge Criteria):
+   - Kesadaran penuh, orientasi baik.
+   - Tanda-tanda vital stabil dalam rentang normal.
+   - Nyeri atau keluhan berkurang minimal 50% skala VAS.
+   - Pasien mampu minum/makan oral tanpa muntah berulang.
+d. Kriteria Elevasi Rujukan (Escalation Criteria):
+   - Jika dalam durasi observasi tanda vital memburuk (tensi anjlok, sesak napas bertambah, suhu > 39.5 C resisten antipiretik, nyeri abdomen meluas).
+   - Dokter Jaga segera menaikkan status menjadi rujukan gawat darurat dan menghubungi RS Mitra.
