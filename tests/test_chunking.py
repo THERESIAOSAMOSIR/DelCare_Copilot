@@ -4,6 +4,7 @@ Unit test untuk verifikasi parser dan pemotong teks korpus SOP.
 """
 
 import os
+
 from src.knowledge.chunking import (
     chunk_text_recursive,
     load_and_chunk_corpus,
@@ -54,3 +55,20 @@ def test_load_corpus_directory():
         assert "doc_id" in first_chunk.metadata
         assert "target_action" in first_chunk.metadata
         assert "ref_url" in first_chunk.metadata
+
+
+def test_chunk_size_and_overlap_are_respected():
+    text = (
+        "Pasien mengalami sesak napas setelah aktivitas fisik. "
+        "Petugas melakukan pemeriksaan tanda vital dan memberikan "
+        "penanganan sesuai protokol klinik. "
+    ) * 20
+
+    chunks = chunk_text_recursive(
+        text,
+        chunk_size=500,
+        chunk_overlap=100,
+    )
+
+    assert chunks
+    assert all(0 < len(chunk) <= 500 for chunk in chunks)
