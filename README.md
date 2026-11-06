@@ -113,3 +113,5 @@ uv run python -m src.cli --start TRIASE_MERAH --algo astar
 
 ## Lisensi
 MIT License. Lihat [LICENSE](LICENSE).
+
+<!-- verified milestone 3 -->
