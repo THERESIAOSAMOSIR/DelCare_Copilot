@@ -18,10 +18,10 @@ def test_semantic_retrieval_and_ood(tmp_path):
     store.index_chunks(chunks)
     assert store.count() > 0
 
-    retriever = SemanticRetriever(store, relevance_threshold=0.35)
+    retriever = SemanticRetriever(store, relevance_threshold=0.45)
     res_med = retriever.search("Pasien sesak napas berat dan bibir membiru", top_k=1)
     assert not res_med["is_out_of_domain"]
-    assert res_med["best_similarity"] >= 0.35
+    assert res_med["best_similarity"] >= 0.45
     assert len(res_med["matches"]) > 0
 
     res_ood = retriever.search(

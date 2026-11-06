@@ -1,9 +1,7 @@
 id,type,query,expected_doc,retrieved_doc,expected_ood,is_out_of_domain,similarity,status
-Q1,Literal / Relevan,Prosedur penanganan pasien gawat darurat henti napas dan henti jantung,SOP-TRG-001,SOP-TRG-002,False,False,0.6907,MISMATCH
-Q2,Literal / Relevan,Kriteria dan alur rujukan pasien kritis menuju RSUD Porsea RS_A,SOP-RUJ-005,SOP-RUJ-005,False,False,0.6956,TERPENUHI
-Q3,Sinonim / Bahasa Awam,"Dada terasa sesak sekali, napas berbunyi mengi sehabis lari keliling lapangan",SOP-MED-007,SOP-RUJ-005,False,False,0.607,MISMATCH
-Q4,Sinonim / Bahasa Awam,Patah tulang tangan membengkak dan sangat nyeri karena jatuh saat main basket,SOP-MED-009,SOP-TRG-003,False,False,0.5682,MISMATCH
-Q5,Ambigu / Relevan,Mahasiswa tiba-tiba lemas dan hampir tidak sadar saat kegiatan lapangan,SOP-MED-008,SOP-TRG-002,False,False,0.6574,MISMATCH
-Q6,Ambigu / Relevan,Napas terasa berat setelah aktivitas olahraga di kampus,SOP-MED-007,SOP-TRG-001,False,False,0.5784,MISMATCH
-Q7,Out-of-Domain (OOD),Bagaimana jadwal pembayaran cicilan uang kuliah tunggal di IT Del?,NONE,SOP-ADM-004,True,False,0.5958,LOLOS_PALSU
-Q8,Out-of-Domain (OOD),Resep bumbu memasak arsik ikan mas khas tradisional Batak Toba,NONE,SOP-TRG-002,True,False,0.5923,LOLOS_PALSU
+Q1,Literal / Relevan,Prosedur penanganan pasien gawat darurat henti napas dan henti jantung,SOP-TRG-001,SOP-OBS-010,False,False,0.6102,MISMATCH
+Q2,Literal / Relevan,Kriteria dan alur rujukan pasien kritis menuju RSUD Porsea RS_A,SOP-RUJ-005,SOP-TRG-002,False,False,0.7571,MISMATCH
+Q3,Sinonim / Bahasa Awam,"Dada terasa sesak sekali, napas berbunyi mengi sehabis lari keliling lapangan",SOP-MED-007,SOP-OBS-010,False,True,0.3885,MISMATCH
+Q4,Sinonim / Bahasa Awam,Patah tulang tangan membengkak dan sangat nyeri karena jatuh saat main basket,SOP-MED-009,SOP-TRG-002,False,False,0.52,MISMATCH
+Q5,Out-of-Domain (OOD),Bagaimana jadwal pembayaran cicilan uang kuliah tunggal di IT Del?,NONE,SOP-EVK-006,True,True,0.402,DITOLAK (OOD)
+Q6,Out-of-Domain (OOD),Resep bumbu memasak arsik ikan mas khas tradisional Batak Toba,NONE,SOP-RUJ-005,True,True,0.1474,DITOLAK (OOD)

@@ -16,7 +16,7 @@ class SemanticRetriever:
     def __init__(
         self,
         vector_store: DelCareVectorStore,
-        relevance_threshold: float = 0.35,  # Batas minimum skor Cosine Similarity
+        relevance_threshold: float = 0.45,  # Batas minimum skor Cosine Similarity
     ):
         self.store = vector_store
         self.threshold = relevance_threshold

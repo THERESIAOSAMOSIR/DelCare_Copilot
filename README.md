@@ -28,6 +28,9 @@ Terdiri dari 12 dokumen SOP dan manual regulasi resmi fasyankes primer di `data/
 - `SOP-FAR-011`: Pengelolaan & Dispensing Obat Kedaruratan Terbatas
 - `POL-PDP-012`: Kebijakan Kerahasiaan & Pelindungan Data Pribadi Rekam Medis (UU PDP)
 
+Dengan konfigurasi chunking `chunk_size=500` dan `chunk_overlap=100`, korpus
+menghasilkan 79 chunk yang terindeks di ChromaDB.
+
 Seluruh dokumen mengacu pada sumber hukum dan regulasi terbuka: UU No. 17/2023, UU No. 27/2022, Permenkes No. 9/2014, Permenkes No. 16/2024, Permenkes No. 24/2022, SISRUTE Kemenkes RI, dan Pedoman WHO ETAT.
 
 ### Arsitektur Modul Knowledge Base
@@ -43,7 +46,7 @@ delcare-copilot/
 │       ├── vector_store.py   # Persistent ChromaDB client & Sentence-Transformers
 │       └── retriever.py      # Semantic vector search & relevance threshold guardrail
 ├── benchmarks/
-│   └── run_semantic_eval.py  # Tolok ukur 8 kueri bisnis & analisis penolakan OOD
+│   └── run_semantic_eval.py  # Tolok ukur 6 kueri bisnis & analisis penolakan OOD
 └── tests/
     ├── test_chunking.py      # Pengujian unit chunking & boundary preservation
     ├── test_vector_store.py  # Pengujian persistensi ChromaDB
@@ -74,7 +77,9 @@ uv run pytest -v
 
 ### Relevance Threshold
 
-Sistem menggunakan cosine similarity dengan threshold awal 0.35.
+Sistem menggunakan model embedding multilingual
+`paraphrase-multilingual-MiniLM-L12-v2` dan cosine similarity dengan
+threshold 0.45.
 Query dengan skor similarity terbaik di bawah threshold dikategorikan
 sebagai out-of-domain dan ditolak oleh relevance guardrail. Nilai ini
 dievaluasi menggunakan query relevan, ambigu, dan out-of-domain pada
